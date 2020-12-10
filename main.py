@@ -1,7 +1,25 @@
-from kivymd.app import MDApp
+from kivymd.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import Screen
 
-class MainApp(MDApp):
+
+class HomeScreen(Screen):
     pass
 
-MainApp().run()
 
+class SettingsScreen(Screen):
+    pass
+
+
+GUI = Builder.load_file("main.kv")
+
+
+class MainApp(App):
+    def build(self):
+        return GUI
+
+    def change_screen(self, screen_name):
+        print(screen_name)
+
+
+MainApp().run()
