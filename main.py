@@ -19,6 +19,10 @@ class MainApp(App):
         return GUI
 
     def change_screen(self, screen_name):
+        # Get the screen manager from kv file
+        screen_manager = self.root.ids["screen_manager"]
+        screen_manager.current = screen_name
+        print(self.root.ids)
         print(screen_name)
 
 
