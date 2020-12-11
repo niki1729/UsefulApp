@@ -1,6 +1,7 @@
-from kivymd.app import App
+from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
+from kivy.uix.boxlayout import BoxLayout
 
 
 class HomeScreen(Screen):
@@ -11,11 +12,15 @@ class SettingsScreen(Screen):
     pass
 
 
-GUI = Builder.load_file("main.kv")
+class ContentNavigationDrawer(BoxLayout):
+    # https://kivymd.readthedocs.io/en/latest/components/navigation-drawer/
+    pass
 
 
-class MainApp(App):
+class MainApp(MDApp):
     def build(self):
+        # Creating the GUI
+        GUI = Builder.load_file("main.kv")
         return GUI
 
     def change_screen(self, screen_name):

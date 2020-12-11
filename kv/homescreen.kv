@@ -1,7 +1,13 @@
+#: import labels labels
+
 
 <HomeScreen>:
-    Button:
-        text:
-            "You are at homescreen!"
-        on_release:
-            app.change_screen("settings_screen")
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: labels.TITLE
+            left_action_items: [["menu", lambda x: app.change_screen("settings_screen")]]
+
+        Button:
+            text: "Content"
+            halign: "center"
