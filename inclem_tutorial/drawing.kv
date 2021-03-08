@@ -1,0 +1,127 @@
+<ColorsSlider@Slider>:
+    min: 0
+    max: 1
+    value: 0.5
+    size_hint_y: 1
+
+
+<DrawingWidget>:
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<Interface>:
+    orientation: "vertical"
+    DrawingWidget:
+        target_colour_rgba: red_slider.value, green_slider.value, blue_slider.value, alpha_slider.value
+        target_width_px: width_slider.value
+        size_hint_y: 10
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: 1
+        Label:
+            text: "Red: {}".format(round(red_slider.value, 2))
+            size_hint_x: 1
+            color: (1,0,0,1)
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,0)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        ColorsSlider:
+            id: red_slider
+            size_hint_x: 3
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: 1
+        Label:
+            text: "Green: {}".format(round(green_slider.value, 2))
+            size_hint_x: 1
+            color: (0,1,0,1)
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,0)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        ColorsSlider:
+            id: green_slider
+            size_hint_x: 3
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: 1
+        Label:
+            text: "Blue: {}".format(round(blue_slider.value, 2))
+            size_hint_x: 1
+            color: (0,0,1,1)
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,0)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        ColorsSlider:
+            id: blue_slider
+            size_hint_x: 3
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: 1
+        Label:
+            text: "Oppacity: {}%".format(round(100*alpha_slider.value, 0))
+            size_hint_x: 1
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,0)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        ColorsSlider:
+            id: alpha_slider
+            size_hint_x: 3
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: 1
+        Label:
+            text: "width: {}".format(round(width_slider.value, 2))
+            size_hint_x: 1
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,0)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Slider:
+            id: width_slider
+            min: 1
+            max: 20
+            value: 2
+            size_hint_x: 3
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: 1
+        Label:
+            text: "Output colour: "
+        Widget:
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            canvas:
+                Color:
+                    rgba: red_slider.value, green_slider.value, blue_slider.value, alpha_slider.value
+                Rectangle:
+                    size: self.size
+                    pos: self.pos

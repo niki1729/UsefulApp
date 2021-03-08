@@ -2,6 +2,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.navigationdrawer import NavigationLayout
 
 
 class HomeScreen(Screen):
@@ -12,7 +13,7 @@ class SettingsScreen(Screen):
     pass
 
 
-class ContentNavigationDrawer(BoxLayout):
+class ContentNavigationDrawer(Screen):
     # https://kivymd.readthedocs.io/en/latest/components/navigation-drawer/
     pass
 

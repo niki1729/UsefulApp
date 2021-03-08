@@ -1,4 +1,5 @@
 #: import labels labels
+#: include kv/navdrawer.kv
 
 
 <HomeScreen>:
@@ -6,8 +7,5 @@
         orientation: "vertical"
         MDToolbar:
             title: labels.TITLE
-            left_action_items: [["menu", lambda x: app.change_screen("settings_screen")]]
+            left_action_items: [["menu", lambda x: nav_drawer.toogle_nav_drawer()]]
 
-        Button:
-            text: "Content"
-            halign: "center"
