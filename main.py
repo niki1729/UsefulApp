@@ -1,35 +1,31 @@
 from kivymd.app import MDApp
-from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
+from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from kivymd.uix.navigationdrawer import NavigationLayout
+from labels import *
+from kivy.properties import ObjectProperty
 
 
 class HomeScreen(Screen):
     pass
 
 
-class SettingsScreen(Screen):
+class CalculatorScreen(Screen):
     pass
 
 
-class ContentNavigationDrawer(Screen):
+class ContentNavigationDrawer(BoxLayout):
+    screen_manager = ObjectProperty()
+    nav_drawer = ObjectProperty()
     # https://kivymd.readthedocs.io/en/latest/components/navigation-drawer/
     pass
 
 
 class MainApp(MDApp):
     def build(self):
-        # Creating the GUI
+        self.title = TITLE
         GUI = Builder.load_file("main.kv")
         return GUI
-
-    def change_screen(self, screen_name):
-        # Get the screen manager from kv file
-        screen_manager = self.root.ids["screen_manager"]
-        screen_manager.current = screen_name
-        print(self.root.ids)
-        print(screen_name)
 
 
 MainApp().run()

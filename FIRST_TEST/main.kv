@@ -1,0 +1,22 @@
+#: include kv/homescreen.kv
+#: include kv/settingsscreen.kv
+#: include kv/navdrawer.kv
+
+
+Screen:
+    NavigationLayout:
+        id: navigation_layout
+        ScreenManager:
+            id: screen_manager
+
+            HomeScreen:
+                name: "home_screen"
+                id: home_screen
+
+        MDNavigationDrawer:
+            name: "nav_drawer"
+            id: nav_drawer
+            ContentNavigationDrawer:
+                id: content_drawer
+
+

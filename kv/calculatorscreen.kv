@@ -1,8 +1,11 @@
-<HomeScreen>:
+#: import labels labels
+
+
+<CalculatorScreen>:
     BoxLayout:
         orientation: "vertical"
         Label:
-            text: "Welcome to homescreen!"
+            text: "Welcome to" + labels.NDCalculator
             color: 1,0,1,1
             size_hint_y: 1
         Button:
@@ -10,4 +13,3 @@
             size_hint_y: 3
             color: 1, 1, 0, 1
             color_before: 1,0,0,1
-

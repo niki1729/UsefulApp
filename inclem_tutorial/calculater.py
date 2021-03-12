@@ -28,7 +28,6 @@ class Calculator(App):
         input_grid.add_widget(Button(text="clear", size_hint_y=1, size_hint_x=1))
         print(input_grid.children[0], input_grid.children[1], input_grid.children[2])
 
-
         def print_button_text(instance):
             input_grid.children[2].text += instance.text
 

@@ -1,22 +1,35 @@
+#: import labels labels
 #: include kv/homescreen.kv
-#: include kv/settingsscreen.kv
-#: include kv/navdrawer.kv
+#: include kv/contentnavigationdrawer.kv
+#: include kv/calculatorscreen.kv
 
 
 Screen:
+    MDToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        title: labels.TITLE
+        elevation: 10
+        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+
     NavigationLayout:
-        id: navigation_layout
+        y: toolbar.height*2
+
         ScreenManager:
             id: screen_manager
 
             HomeScreen:
                 name: "home_screen"
-                id: home_screen
+
+            CalculatorScreen:
+                name: "calculator_screen"
+
 
         MDNavigationDrawer:
-            name: "nav_drawer"
             id: nav_drawer
-            ContentNavigationDrawer:
-                id: content_drawer
 
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
 
