@@ -5,7 +5,7 @@
 
         orientation: "vertical"
         MDLabel:
-            text: "  "+labels.NDChooseWhatYouWant
+            text: "     "+labels.NDChooseWhatYouWant
             # color: 1,0,0,1
             size_hint_y: None
 
@@ -26,3 +26,6 @@
 
                 OneLineListItem:
                     text: labels.NDConverter
+                    on_release:
+                        root.nav_drawer.set_state("close")
+                        root.screen_manager.current="converter_screen"

@@ -1,3 +1,6 @@
+from kivy.core.text import Label
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
@@ -5,6 +8,14 @@ from kivy.uix.boxlayout import BoxLayout
 from labels import *
 from kivy.properties import ObjectProperty, StringProperty
 
+from kivy.core.window import Window
+
+Window.size = (600, 700)
+
+
+# For PopupWindow, probably wil be used several times
+class P(FloatLayout):
+    pass
 
 
 class HomeScreen(Screen):
@@ -17,6 +28,10 @@ class CalculatorScreen(Screen):
     last_calc = ""
     new_calc = True
     char_processed = False
+
+    def __init__(self, **kwargs):
+        super(CalculatorScreen, self).__init__(**kwargs)
+        Window.bind(on_key_down=self._on_keyboard_down)
 
     def print_button_text(self, char):
         self.char_processed = False
@@ -46,14 +61,18 @@ class CalculatorScreen(Screen):
         self.new_calc = False
 
     def eval_function(self):
-        try:
-            self.last_result = str(eval(self.ids.calc_inp.text))
-            self.last_calc = self.ids.calc_inp.text
-            self.history_text = str(self.ids.calc_inp.text) + "=" + self.last_result
-            self.ids.calc_inp.text = ""
-            self.new_calc = True
-        except:
-            self.ids.calc_inp.text = "Python syntax error!"
+        if self.ids.calc_inp.text != "":
+
+            try:
+                self.last_result = str(round(eval(self.ids.calc_inp.text), 4))
+                self.last_calc = self.ids.calc_inp.text
+                self.history_text = str(self.ids.calc_inp.text) + "=" + self.last_result
+                self.ids.calc_inp.text = ""
+                self.new_calc = True
+            except:
+                # self.last_result = self.ids.calc_inp.text
+                # self.ids.calc_inp.text = "Python syntax error!"
+                self.show_popup()
 
     def last_result_print(self):
         self.ids.calc_inp.text = self.last_calc
@@ -69,8 +88,31 @@ class CalculatorScreen(Screen):
             self.new_calc = True
 
     def _on_keyboard_down(self, instance, keyboard, keycode, text, modifiers):
-        if self.test3.focus and keycode == 40:  # 40 - Enter key pressed
+
+        print(text)
+        if keycode == 40:  # 40 - Enter key pressed#
+            print("test")
             self.eval_function()
+        return True
+
+    def show_popup(self):
+        show = P()
+        popup_window = Popup(title="Python syntax error!", content=show, size_hint=(0.5, 0.3), size=(400, 100))
+        # show.ids.popuplabel.text = "Python syntax error!"
+        popup_window.open()
+
+
+class ConverterScreen(Screen):
+    def add_micro(self, instance):
+        if instance == "from":
+            self.ids.conv_from_inp.text += "μ"
+
+        if instance == "to":
+            self.ids.conv_to_inp.text += "μ"
+
+
+    def start_convert(self):
+        print(str(self.ids.conv_from_inp.text), str(self.ids.conv_to_inp.text))
 
 
 class ContentNavigationDrawer(BoxLayout):

@@ -1,54 +1,64 @@
 #: import labels labels
 
+
+
 <CalcButton@Button>:
     size_hint_y: 1
     background_down: "grey_color.png"
-    # color: 0,0,0,1
+    font_size: 25
+    color: .05, .05, .05, 1
 
 
 <CalculatorScreen>:
     BoxLayout:
         orientation: "vertical"
 
-        # First line with History, Input and DEL and CLEAR Button
+        # First line with History, Input and DEL and CLEAR Buttons
         BoxLayout:
-            orientation: "horizontal"
-            cols: 3
+            orientation: "vertical"
+            cols:2
             size_hint_y: 2
 
             BoxLayout:
-                orientation: "vertical"
-                size_hint_x: 5
+                orientation: "horizontal"
+                # size_hint_x: 6
+
                 Button:
                     id: last_inp
                     text: root.history_text
                     font_size: self.height - 20
                     background_down: "grey_color.png"
-                    size_hint_y: 1
+                    # size_hint_y: 1
+                    size_hint_x: 4
+                    font_size: 25
                     on_release: root.last_result_print()
 
-                TextInput:
-                    on_text: print(self.text)
-                    id: calc_inp
-                    text: ""
-                    size_hint_y: 2
-                    font_size: self.height - 20
-                    multiline: False
-                    background_color: (.5, .5, .5, 1) if self.focus else (.2, .2, .2, 0.9)
-                    #foreground_color: 0,1,0,1
-            Button:
-                text: labels.CalculatorDelete
-                background_down: "grey_color.png"
-                size_hint_x: 1
-                color: 1, 1, 0, 1
-                on_release: root.delete_last_char()
+                Button:
+                    text: labels.CalculatorClear
+                    background_down: "grey_color.png"
+                    size_hint_x: 1
+                    color: 1, 1, 0, 1
+                    font_size: 25
+                    on_release: root.clear_text_input()
 
-            Button:
-                text: labels.CalculatorClear
-                background_down: "grey_color.png"
-                size_hint_x: 1
-                color: 1, 1, 0, 1
-                on_release: root.clear_text_input()
+                Button:
+                    text: labels.CalculatorDelete
+                    background_down: "grey_color.png"
+                    size_hint_x: 1
+                    color: 1, 1, 0, 1
+                    font_size: 25
+                    on_release: root.delete_last_char()
+
+            TextInput:
+                id: calc_inp
+                text: ""
+                size_hint_y: 1.5
+                font_size: self.height - 20
+                multiline: False
+                background_color: (.5, .5, .5, 1) if self.focus else (.2, .2, .2, 0.9)
+                #foreground_color: 0,1,0,1
+
+
 
         # The following BoxLayouts are Buttons (from NumberButton)
         # for the Calculator with the last one the equal Button)
@@ -119,6 +129,7 @@
                 text: "="
                 size_hint_y: 1
                 color: 0,1,0,1
+                font_size: 30
                 on_press: root.eval_function()
 
 
