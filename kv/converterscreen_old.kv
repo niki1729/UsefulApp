@@ -1,0 +1,85 @@
+#: import labels labels
+
+
+
+<UnitsButton@Button>:
+    size_hint_y: 1
+    background_down: "grey_color.png"
+    font_size: 25
+    color: .05, .05, .05, 1
+
+
+
+
+<ConverterScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint_y: 1
+            Label:
+                text: labels.ConverterAcceptedUnits +  labels.ConverterAcceptedSubmultiples
+                multiline: True
+
+        BoxLayout:
+            size_hint_y: 1
+
+            TextInput:
+                id: conv_from_inp
+                size_hint_x: 3
+                background_color: (.5, .5, .5, 1) if self.focus else (.2, .2, .2, 0.9)
+                font_size: self.height / 2
+
+            Button:
+                text: labels.ConverterIn
+                font_size: 25
+                size_hint_x: 1
+
+            TextInput:
+                id: conv_to_inp
+                size_hint_x: 2
+                background_color: (.5, .5, .5, 1) if self.focus else (.2, .2, .2, 0.9)
+                font_size: self.height / 2
+
+        BoxLayout:
+            size_hint_y: 1
+
+            BoxLayout:
+                size_hint_x:1
+                orientation: "horizontal"
+                UnitsButton:
+                    text: "²"
+                UnitsButton:
+                    text: "³"
+                UnitsButton:
+                    text: "μ"
+                    on_release: root.add_micro("from")
+            Button:
+                size_hint_x:2
+                text: labels.ConverterConvert
+                background_down: "grey_color.png"
+                on_press: root.start_convert()
+
+            BoxLayout:
+                size_hint_x:1
+                orientation: "horizontal"
+                UnitsButton:
+                    text: "²"
+                UnitsButton:
+                    text: "³"
+                UnitsButton:
+                    text: "μ"
+                    on_release: root.add_micro("to")
+
+        BoxLayout:
+            size_hint_y:1
+
+            Label:
+                id: label_formula
+
+        BoxLayout:
+            size_hint_y: 2
+            Label:
+                id: other_measures
+                multiline:True
+
+

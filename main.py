@@ -1,14 +1,16 @@
 from kivy.core.text import Label
+from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from labels import *
 from kivy.properties import ObjectProperty, StringProperty
-
 from kivy.core.window import Window
+
+from labels import *
+from utilities.converter import *
 
 Window.size = (600, 700)
 
@@ -103,13 +105,151 @@ class CalculatorScreen(Screen):
 
 
 class ConverterScreen(Screen):
+    def react_press_unit_button(self, instance):
+        print(str(instance))
+        instance.color = .05, .05, .05, 1
+        instance.background_color = 1, 0, 0, 1
+
+    def start(self):
+        print("HIIIIII")
+
+    parameter = ""
+
+    distance_units = ("m", "ft", "inch", "mi", "yd", "ly")
+    distance_from_list_button = BoxLayout()
+    distance_to_list_button = BoxLayout()
+    for symbol in distance_units:
+        distance_from_list_button.add_widget(
+            Button(text=symbol, background_down="grey_color.png", on_release=react_press_unit_button))
+        distance_to_list_button.add_widget(
+            Button(text=symbol, background_down="grey_color.png", on_release=react_press_unit_button))
+    print(distance_from_list_button, distance_to_list_button)
+
+    time_units = ("s", "min", "h", "y")
+    time_from_list_button = []
+    time_to_list_button = []
+
+    mass_units = ("g", "t", "lb", "oz")
+    mass_from_list_button = []
+    mass_to_list_button = []
+
+    energy_units = ("J", "Wh", "cal", "eV")
+    energy_from_list_button = []
+    energy_to_list_button = []
+
+    def clear_unit_widgets_and_lists(self):
+        '''self.distance_from_list_button = []
+        self.distance_to_list_button = []
+
+        self.time_from_list_button = []
+        self.time_to_list_button = []
+
+        self.mass_from_list_button = []
+        self.mass_to_list_button = []
+
+        self.energy_from_list_button = []
+        self.energy_to_list_button = []'''
+        self.ids.boxlayout_from.clear_widgets()
+        self.ids.boxlayout_to.clear_widgets()
+
+    def add_unit_widget(self, symbol, parameter):
+        self.ids.units_box.orientation = "horizontal"
+        self.ids.units_box_middle.text = ""
+        self.ids.boxlayout_from.add_widget(
+            Button(text=symbol, background_down="grey_color.png", on_release=self.react_press_unit_button))
+        self.ids.boxlayout_to.add_widget(
+            Button(text=symbol, background_down="grey_color.png"))
+
+    def display_distance(self):
+        if self.parameter != "DISTANCE":
+            self.parameter = "DISTANCE"
+            self.clear_unit_widgets_and_lists()
+
+            for symbol in self.distance_units:
+                self.add_unit_widget(symbol, "time")
+
+            '''self.ids.boxlayout_from.add_widget(self.distance_from_list_button)
+            self.ids.boxlayout_to.add_widget(self.distance_from_list_button)'''
+
+    def display_time(self):
+        if self.parameter != "TIME":
+            self.parameter = "TIME"
+            self.clear_unit_widgets_and_lists()
+
+            for symbol in self.time_units:
+                self.add_unit_widget(symbol, "time")
+
+    def display_mass(self):
+        if self.parameter != "MASS":
+            self.parameter = "MASS"
+            self.clear_unit_widgets_and_lists()
+
+            for symbol in self.mass_units:
+                self.add_unit_widget(symbol, "mass")
+
+    def display_energy(self):
+        if self.parameter != "ENERGY":
+            self.parameter = "ENERGY"
+            self.clear_unit_widgets_and_lists()
+
+            for symbol in self.energy_units:
+                self.add_unit_widget(symbol, "energy")
+
+    def display_speed(self):
+        if self.parameter != "SPEED":
+            self.parameter = "SPEED"
+            self.clear_unit_widgets_and_lists()
+
+            speed_units_box_from_distance = BoxLayout()
+            speed_units_box_from_time = BoxLayout()
+            speed_units_box_to_distance = BoxLayout()
+            speed_units_box_to_time = BoxLayout()
+
+            # work more here
+            for symbol in self.distance_units:
+                speed_units_box_from_distance.add_widget(Button(text=symbol, background_down="grey_color.png"))
+                speed_units_box_to_distance.add_widget(Button(text=symbol, background_down="grey_color.png"))
+
+            for symbol in self.time_units:
+                speed_units_box_from_time.add_widget(Button(text=symbol, background_down="grey_color.png"))
+                speed_units_box_to_time.add_widget(Button(text=symbol, background_down="grey_color.png"))
+
+            self.ids.units_box.orientation = "vertical"
+
+            self.ids.boxlayout_from.add_widget(speed_units_box_from_distance)
+            self.ids.boxlayout_from.add_widget(Button(text="", disabled=True, size_hint_x=0.1))
+            self.ids.boxlayout_from.add_widget(speed_units_box_to_distance)
+
+            self.ids.boxlayout_to.add_widget(speed_units_box_from_time)
+            # self.ids.boxlayout_to.add_widget(Label(size_hint_x=0.1))
+            self.ids.boxlayout_to.add_widget(Button(text="", disabled=True, size_hint_x=0.1))
+            self.ids.boxlayout_to.add_widget(speed_units_box_to_time)
+
+            self.ids.units_box_middle.text = "------------------------------------------------------------------------"
+            self.ids.units_box_middle.font_size = 60
+
+    def display_area(self):
+        if self.parameter != "AREA":
+            self.parameter = "AREA"
+            self.clear_unit_widgets_and_lists()
+
+            for symbol in self.distance_units:
+                self.add_unit_widget(symbol + "²", "area")
+
+    def display_volume(self):
+        if self.parameter != "VOLUME":
+            self.parameter = "VOLUME"
+            self.clear_unit_widgets_and_lists()
+
+            for symbol in self.distance_units:
+                self.add_unit_widget(symbol + "³", "volume")
+
     def add_micro(self, instance):
         if instance == "from":
             self.ids.conv_from_inp.text += "μ"
 
         if instance == "to":
             self.ids.conv_to_inp.text += "μ"
-
 
     def start_convert(self):
         print(str(self.ids.conv_from_inp.text), str(self.ids.conv_to_inp.text))

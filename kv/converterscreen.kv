@@ -8,6 +8,12 @@
     font_size: 25
     color: .05, .05, .05, 1
 
+<ParameterButton@Button>:
+    size_hint_y: 1
+    background_down: "grey_color.png"
+    font_size: 20
+    color: .05, .05, .05, 1
+
 
 
 
@@ -16,9 +22,81 @@
         orientation: "vertical"
         BoxLayout:
             size_hint_y: 1
+            orientation: "horizontal"
+
+            # Distance
+            ParameterButton:
+                text: labels.ConverterDistance
+                on_release: root.display_distance()
+
+            # Time
+            ParameterButton:
+                text: labels.ConverterTime
+                on_release: root.display_time()
+
+            #Mass
+            ParameterButton:
+                text: labels.ConverterMass
+                on_release: root.display_mass()
+
+            # Energy
+            ParameterButton:
+                text: labels.ConverterEnergy
+                on_release: root.display_energy()
+
+            # Speed
+            ParameterButton:
+                text: labels.ConverterSpeed
+                on_release: root.display_speed()
+
+            # Area
+            ParameterButton:
+                text: labels.ConverterArea
+                on_release: root.display_area()
+
+            # Volume
+            ParameterButton:
+                text: labels.ConverterVolume
+                on_release: root.display_volume()
+
+        BoxLayout:
+            size_hint_y: 0.5
+            orientation: "horizontal"
             Label:
-                text: labels.ConverterAcceptedUnits +  labels.ConverterAcceptedSubmultiples
-                multiline: True
+                size_hint_x:1
+                text: labels.ConverterTextFrom
+            Button:
+                size_hint_x: 0.25
+                text: labels.ConverterIn
+                font_size: 25
+                size_hint_x: 1
+                background_down: "grey_color.png"
+            Label:
+                size_hint_x:1
+                text: labels.ConverterTextTo
+
+        BoxLayout:
+            id: units_box
+            size_hint_y: 1
+            orientation: "horizontal"
+            BoxLayout:
+                id: boxlayout_from
+                # orientation: "vertical"
+                size_hint_x: 1
+
+
+            Label:
+                id: units_box_middle
+                text: ""
+                size_hint_x: 0.1
+
+            BoxLayout:
+                size_hint_x: 1
+                # orientation: "vertical"
+                id: boxlayout_to
+
+
+
 
         BoxLayout:
             size_hint_y: 1
@@ -41,45 +119,20 @@
                 font_size: self.height / 2
 
         BoxLayout:
-            size_hint_y: 1
 
-            BoxLayout:
-                size_hint_x:1
-                orientation: "horizontal"
-                UnitsButton:
-                    text: "²"
-                UnitsButton:
-                    text: "³"
-                UnitsButton:
-                    text: "μ"
-                    on_release: root.add_micro("from")
-            Button:
-                size_hint_x:2
-                text: labels.ConverterConvert
-                background_down: "grey_color.png"
-                on_press: root.start_convert()
-
-            BoxLayout:
-                size_hint_x:1
-                orientation: "horizontal"
-                UnitsButton:
-                    text: "²"
-                UnitsButton:
-                    text: "³"
-                UnitsButton:
-                    text: "μ"
-                    on_release: root.add_micro("to")
 
         BoxLayout:
             size_hint_y:1
 
             Label:
                 id: label_formula
+                text: "test formula place"
 
         BoxLayout:
             size_hint_y: 2
             Label:
                 id: other_measures
                 multiline:True
+                text: "test other measures"
 
 
