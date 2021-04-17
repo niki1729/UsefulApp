@@ -11,6 +11,7 @@ from kivy.core.window import Window
 
 from labels import *
 from utilities.converter import *
+from utilities.calculator_eval import *
 
 Window.size = (600, 700)
 
@@ -66,7 +67,8 @@ class CalculatorScreen(Screen):
         if self.ids.calc_inp.text != "":
 
             try:
-                self.last_result = str(round(eval(self.ids.calc_inp.text), 4))
+                eval=Eval()
+                self.last_result = str(round(eval.evaluate(self.ids.calc_inp.text), 4))
                 self.last_calc = self.ids.calc_inp.text
                 self.history_text = str(self.ids.calc_inp.text) + "=" + self.last_result
                 self.ids.calc_inp.text = ""

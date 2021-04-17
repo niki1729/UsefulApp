@@ -5,6 +5,7 @@ class Format:
 
 
 TITLE = "UsefullApp"
+SETTINGS = "Settings"
 
 NDHomeScreen = "Home"
 NDCalculator = "Calculator"
