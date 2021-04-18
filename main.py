@@ -122,7 +122,7 @@ class ConverterScreen(Screen):
         instance.background_color = 1, 0, 0, 1
 
     def start(self):
-        print("HIIIIII")
+        print("HI")
 
     parameter = ""
 
