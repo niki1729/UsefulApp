@@ -6,4 +6,4 @@ This App will have different features accessible by the ContentNavigationDrawer.
 
 In the future I will implement other things.
 
-In addition, I would like to implement i18n library to change easily the language of the App (English, German, French and probably Russian).
+In addition, I will like to implement i18n library to change easily the language of the App (English, German, French and probably Russian).

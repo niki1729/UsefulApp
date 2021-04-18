@@ -4,7 +4,7 @@ class Format:
     underline = "\033[4m"
 
 
-TITLE = "UsefullApp"
+TITLE = "UsefulApp"
 SETTINGS = "Settings"
 
 NDHomeScreen = "Home"
