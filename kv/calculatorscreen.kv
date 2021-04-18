@@ -78,6 +78,9 @@
             CalcButton:
                 text: "+"
                 on_press: root.print_button_text("+")
+            CalcButton:
+                text: "-"
+                on_press: root.print_button_text("-")
 
         BoxLayout:
             size_hint_y: 1
@@ -92,9 +95,11 @@
                 text: "6"
                 on_press: root.print_button_text("6")
             CalcButton:
-                text: "-"
-                on_press: root.print_button_text("-")
-
+                text: "*"
+                on_press: root.print_button_text("*")
+            CalcButton:
+                text: "/"
+                on_press: root.print_button_text("/")
 
         BoxLayout:
             size_hint_y: 1
@@ -111,6 +116,9 @@
             CalcButton:
                 text: "."
                 on_press: root.print_button_text(".")
+            CalcButton:
+                text: "√"
+                on_press: root.print_button_text("√")
 
         BoxLayout:
             size_hint_y: 1
@@ -119,15 +127,17 @@
                 text: "0"
                 on_press: root.print_button_text("0")
             CalcButton:
-                text: "*"
-                on_press: root.print_button_text("*")
+                text: "("
+                on_press: root.print_button_text("(")
             CalcButton:
-                text: "/"
-                on_press: root.print_button_text("/")
+                text: ")"
+                on_press: root.print_button_text(")")
+
 
             Button:
                 text: "="
                 size_hint_y: 1
+                size_hint_x: 2
                 color: 0,1,0,1
                 font_size: 30
                 on_press: root.eval_function()

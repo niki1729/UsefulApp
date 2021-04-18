@@ -1,3 +1,5 @@
+from random import randint
+
 from kivy.core.text import Label
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
@@ -11,7 +13,7 @@ from kivy.core.window import Window
 
 from labels import *
 from utilities.converter import *
-from utilities.calculator_eval import *
+from utilities.calculator_eval import Eval
 
 Window.size = (600, 700)
 
@@ -22,7 +24,8 @@ class P(FloatLayout):
 
 
 class HomeScreen(Screen):
-    pass
+    def change_color(self):
+        self.ids.welcome_label.color = randint(0, 100) / 100, randint(0, 100) / 100, randint(0, 100) / 100, 1
 
 
 class CalculatorScreen(Screen):
@@ -40,7 +43,7 @@ class CalculatorScreen(Screen):
         self.char_processed = False
 
         if self.new_calc:
-            state = char == "+" or char == "-" or char == "*" or char == "/"
+            state = char == "+" or char == "*" or char == "/"  # char == "-" or
             if not self.char_processed and state:
                 if self.last_result != "" and self.ids.calc_inp.text == "":
                     self.ids.calc_inp.text = self.last_result + str(char)
@@ -67,8 +70,8 @@ class CalculatorScreen(Screen):
         if self.ids.calc_inp.text != "":
 
             try:
-                eval=Eval()
-                self.last_result = str(round(eval.evaluate(self.ids.calc_inp.text), 4))
+                eval = Eval()
+                self.last_result = str(self.if_int(round(eval.evaluate(self.ids.calc_inp.text), 4)))
                 self.last_calc = self.ids.calc_inp.text
                 self.history_text = str(self.ids.calc_inp.text) + "=" + self.last_result
                 self.ids.calc_inp.text = ""
@@ -104,6 +107,12 @@ class CalculatorScreen(Screen):
         popup_window = Popup(title="Python syntax error!", content=show, size_hint=(0.5, 0.3), size=(400, 100))
         # show.ids.popuplabel.text = "Python syntax error!"
         popup_window.open()
+
+    def if_int(self, result):
+        if int(result) == result:
+            return int(result)
+        else:
+            return result
 
 
 class ConverterScreen(Screen):
@@ -255,6 +264,15 @@ class ConverterScreen(Screen):
 
     def start_convert(self):
         print(str(self.ids.conv_from_inp.text), str(self.ids.conv_to_inp.text))
+
+
+list_images = ["resources/niki.jpg", "resources/roseschloss2.jpg", "resources/tunnel.jpg"]
+
+
+class DemoScreen(Screen):
+    def change_image(self):
+        self.ids.demo_image.source = list_images[randint(0, len(list_images) - 1)]
+        self.ids.button_change_image.color = randint(0, 100) / 100, randint(0, 100) / 100, randint(0, 100) / 100, 1
 
 
 class ContentNavigationDrawer(BoxLayout):
