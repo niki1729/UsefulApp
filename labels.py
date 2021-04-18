@@ -11,6 +11,7 @@ NDHomeScreen = "Home"
 NDCalculator = "Calculator"
 NDChooseWhatYouWant = "Choose what you want:"
 NDConverter = "Converter"
+NDDemo = "Demo"
 
 CalculatorDelete = "Del"
 CalculatorClear = "C"
@@ -32,3 +33,6 @@ ConverterArea = "Area"
 ConverterVolume = "Volume"
 ConverterTextFrom = "Choose the unit: from"
 ConverterTextTo = "Choose the unit: to"
+
+
+DemoChangeImage="Change Image"
